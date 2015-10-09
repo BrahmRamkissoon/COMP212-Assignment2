@@ -13,13 +13,13 @@ namespace BrahmLab2
 {
     public partial class StudentTrackerForm : Form
     {
-
        public StudentTrackerForm()
         {
             InitializeComponent();
             //_sampleList();
         }
 
+        // Private instance variables
         private Dictionary<int, string> _studentList = new Dictionary<int, string>();
         private int studentID;
         private string studentName;
@@ -72,7 +72,15 @@ namespace BrahmLab2
 
         private void deleteAllRecordsButton_Click(object sender, EventArgs e)
         {
+            DialogResult confirmDeleteRecords =
+                MessageBox.Show("Are you sure you want to delete all records?",
+                                "Confirm Delete All Records", MessageBoxButtons.YesNo);
 
+            if (confirmDeleteRecords == DialogResult.Yes)
+            {
+                StudentList.Clear();
+            }
+            
         }
 
         private void searchWithStudentIDButton_Click(object sender, EventArgs e)
@@ -93,7 +101,8 @@ namespace BrahmLab2
 
         private void clearDisplayScreenButton_Click(object sender, EventArgs e)
         {
-
+            inputStudentIDTextBox.Clear();
+            inputStudentNameTextBox.Clear();
         }
 
         private void displayAllButton_Click(object sender, EventArgs e)
@@ -106,7 +115,8 @@ namespace BrahmLab2
             // Confirm application exit
             
             DialogResult confirmExit = 
-                MessageBox.Show("Are you sure you want to exit?","Confirm Close Application", MessageBoxButtons.YesNo);
+                MessageBox.Show("Are you sure you want to exit?",   
+                                "Confirm Close Application", MessageBoxButtons.YesNo);
 
             if (confirmExit == DialogResult.Yes)
             {
