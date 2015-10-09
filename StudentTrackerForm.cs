@@ -103,6 +103,8 @@ namespace BrahmLab2
 
         private void quitButton_Click(object sender, EventArgs e)
         {
+            // Confirm application exit
+            
             DialogResult confirmExit = 
                 MessageBox.Show("Are you sure you want to exit?","Confirm Close Application", MessageBoxButtons.YesNo);
 
