@@ -64,10 +64,18 @@ namespace BrahmLab2
                     Int32.TryParse(inputStudentIDTextBox.Text, out validStudentID);
 
                     StudentName = inputStudentNameTextBox.Text;
-                    // Add student record 
-                    StudentList.Add(validStudentID, StudentName);
-                    MessageBox.Show("Student Record added sucessfully");
 
+                    //Check for duplicate record
+                    if (StudentList.ContainsKey(Convert.ToInt32(StudentId)))
+                    {
+                        MessageBox.Show("Record already exists, use another Student ID");
+                    }
+                    else
+                    {
+                        // Add student record 
+                        StudentList.Add(validStudentID, StudentName);
+                        MessageBox.Show("Student Record added sucessfully");
+                    }
                 }
                 catch (Exception)
                 {
