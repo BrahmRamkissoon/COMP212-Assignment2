@@ -21,20 +21,20 @@ namespace BrahmLab2
 
         // Private instance variables
         private Dictionary<int, string> _studentList = new Dictionary<int, string>();
-        private int studentID;
-        private string studentName;
+        private string _studentId;
+        private string _studentName;
 
         // Properties
-        public int StudentId
+        public string StudentId
         {
-            get { return studentID; }
-            set { studentID = value; }
+            get { return _studentId; }
+            set { _studentId = value; }
         }
 
         public string StudentName
         {
-            get { return studentName; }
-            set { studentName = value; }
+            get { return _studentName; }
+            set { _studentName = value; }
         }
 
         public Dictionary<int, string> StudentList
@@ -59,10 +59,25 @@ namespace BrahmLab2
 
         private void addStudentIDAndNameButton_Click(object sender, EventArgs e)
        {
-           StudentId = Convert.ToInt32(inputStudentIDTextBox.Text);
-           StudentName = inputStudentNameTextBox.Text;
-    
-           StudentList.Add(StudentId, StudentName);
+            // Check if StudentId and StudentName textboxes are filled
+            if (inputStudentIDTextBox.Text != null && inputStudentNameTextBox.Text != null)
+            {
+                // Check that Student ID is a number
+                try
+                {
+                    int.Parse(inputStudentIDTextBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter Student ID as a number");
+                }
+                StudentId = inputStudentIDTextBox.Text;
+                StudentName = inputStudentNameTextBox.Text;
+
+                // Add student record 
+                StudentList.Add(Convert.ToInt32(StudentId), StudentName);
+            }
+
        }
 
         private void deleteRecordButton_Click(object sender, EventArgs e)

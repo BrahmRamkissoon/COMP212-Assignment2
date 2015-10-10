@@ -68,7 +68,6 @@
             this.inputStudentIDTextBox.Name = "inputStudentIDTextBox";
             this.inputStudentIDTextBox.Size = new System.Drawing.Size(182, 23);
             this.inputStudentIDTextBox.TabIndex = 2;
-            this.inputStudentIDTextBox.Text = "Enter Student ID";
             // 
             // inputStudentNameTextBox
             // 
@@ -77,7 +76,6 @@
             this.inputStudentNameTextBox.Name = "inputStudentNameTextBox";
             this.inputStudentNameTextBox.Size = new System.Drawing.Size(182, 23);
             this.inputStudentNameTextBox.TabIndex = 3;
-            this.inputStudentNameTextBox.Text = "Enter Student _name";
             // 
             // addStudentIDAndNameButton
             // 
@@ -156,7 +154,7 @@
             this.quitButton.UseVisualStyleBackColor = true;
             this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
             // 
-            // StudentTrackerUI
+            // StudentTrackerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -173,7 +171,7 @@
             this.Controls.Add(this.studentNameLabel);
             this.Controls.Add(this.studentIDLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "StudentTrackerUI";
+            this.Name = "StudentTrackerForm";
             this.Text = "CENTENNIAL COLLEGE STUDENT TRACKER";
             this.ResumeLayout(false);
             this.PerformLayout();
