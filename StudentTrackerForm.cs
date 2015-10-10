@@ -103,10 +103,12 @@ namespace BrahmLab2
                 StudentId = inputStudentIDTextBox.Text;
                 if (StudentList.ContainsKey(Convert.ToInt32(StudentId)))
                 {
+                    StudentList.TryGetValue(Convert.ToInt32(StudentId), out studentRecord);
                     // Confirm removal of record
 
                     DialogResult confirmRemove =
-                        MessageBox.Show($"Are you sure you want remove this record? \n ",
+                        MessageBox.Show($"Are you sure you want remove this record? \n " +
+                                        $"[{StudentId}, {studentRecord}]",
                                         "Confirm Record Removal", MessageBoxButtons.YesNo);
 
                     if (confirmRemove == DialogResult.Yes)
