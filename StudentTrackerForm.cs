@@ -10,7 +10,7 @@ namespace BrahmLab2
 {
     public partial class StudentTrackerForm : Form
     {
-       public StudentTrackerForm()
+        public StudentTrackerForm()
         {
             InitializeComponent();
             _sampleList();
@@ -55,7 +55,7 @@ namespace BrahmLab2
             // Check if StudentId and StudentName textboxes are filled
             bool isStudentIDEmpty = string.IsNullOrWhiteSpace(inputStudentIDTextBox.Text);
             bool isStudentNameEmpty = string.IsNullOrWhiteSpace(inputStudentNameTextBox.Text);
-            if ( !isStudentIDEmpty && !isStudentNameEmpty )
+            if (!isStudentIDEmpty && !isStudentNameEmpty)
             {
                 // Check that Student ID is a number
                 try
@@ -66,6 +66,8 @@ namespace BrahmLab2
                     StudentName = inputStudentNameTextBox.Text;
                     // Add student record 
                     StudentList.Add(validStudentID, StudentName);
+                    MessageBox.Show("Student Record added sucessfully");
+
                 }
                 catch (Exception)
                 {
@@ -124,7 +126,7 @@ namespace BrahmLab2
             }
 
         }
-    
+
 
         private void deleteAllRecordsButton_Click(object sender, EventArgs e)
         {
@@ -136,7 +138,7 @@ namespace BrahmLab2
             {
                 StudentList.Clear();
             }
-            
+
         }
 
         // Search for a record using Student ID
@@ -197,16 +199,16 @@ namespace BrahmLab2
         private void quitButton_Click(object sender, EventArgs e)
         {
             // Confirm application exit
-            
-            DialogResult confirmExit = 
-                MessageBox.Show("Are you sure you want to exit?",   
+
+            DialogResult confirmExit =
+                MessageBox.Show("Are you sure you want to exit?",
                                 "Confirm Close Application", MessageBoxButtons.YesNo);
 
             if (confirmExit == DialogResult.Yes)
             {
                 Application.Exit();
             }
-            
+
         }
     }
 }
