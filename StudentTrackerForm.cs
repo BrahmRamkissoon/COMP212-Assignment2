@@ -58,27 +58,34 @@ namespace BrahmLab2
         }*/
 
         private void addStudentIDAndNameButton_Click(object sender, EventArgs e)
-       {
+        {
             // Check if StudentId and StudentName textboxes are filled
-            if (inputStudentIDTextBox.Text != null && inputStudentNameTextBox.Text != null)
+            bool isStudentIDEmpty = string.IsNullOrWhiteSpace(inputStudentIDTextBox.Text);
+            bool isStudentNameEmpty = string.IsNullOrWhiteSpace(inputStudentNameTextBox.Text);
+            if ( !isStudentIDEmpty && !isStudentNameEmpty )
             {
                 // Check that Student ID is a number
                 try
                 {
-                    int.Parse(inputStudentIDTextBox.Text);
+                    int validStudentID;
+                    Int32.TryParse(inputStudentIDTextBox.Text, out validStudentID);
+                    
+                    StudentName = inputStudentNameTextBox.Text;
+                    // Add student record 
+                    StudentList.Add(validStudentID, StudentName);
                 }
                 catch (Exception)
                 {
+                    inputStudentIDTextBox.Clear();
                     MessageBox.Show("Please enter Student ID as a number");
                 }
-                StudentId = inputStudentIDTextBox.Text;
-                StudentName = inputStudentNameTextBox.Text;
-
-                // Add student record 
-                StudentList.Add(Convert.ToInt32(StudentId), StudentName);
+            }
+            else
+            {
+                MessageBox.Show("Please enter Student ID and number.");
             }
 
-       }
+        }
 
         private void deleteRecordButton_Click(object sender, EventArgs e)
         {
@@ -100,16 +107,23 @@ namespace BrahmLab2
 
         private void searchWithStudentIDButton_Click(object sender, EventArgs e)
         {
-            string foundStudentName;
-            StudentId = Convert.ToInt32(inputStudentIDTextBox.Text);
-            if (StudentList.TryGetValue(StudentId, out foundStudentName))
+            string studentRecord;       // value connected to key
+            try
+                {
+                int.Parse(inputStudentIDTextBox.Text);
+            }
+                catch (Exception)
             {
-                MessageBox.Show(foundStudentName);
+                MessageBox.Show("Please enter Student ID as a number");
+            }
+            StudentId = inputStudentIDTextBox.Text;
+            if (StudentList.TryGetValue(Convert.ToInt32(StudentId), out studentRecord))
+            {
+                MessageBox.Show(studentRecord);
             }
             else
             {
-                MessageBox.Show("Student not found");
-
+                MessageBox.Show("Student record not found");
             }
 
         }
