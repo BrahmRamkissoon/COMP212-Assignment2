@@ -16,7 +16,7 @@ namespace BrahmLab2
        public StudentTrackerForm()
         {
             InitializeComponent();
-            //_sampleList();
+            _sampleList();
         }
 
         // Private instance variables
@@ -44,18 +44,14 @@ namespace BrahmLab2
         }
 
 
-        /*
         private void _sampleList()
         {
-            Student brahm = new Student(300500046, "Brahm");
-            Student john= new Student(300500046, "John");
-            Student david = new Student(300500046, "David");
+            StudentList.Add(300500046, "Brahm Ramkissoon");
+            StudentList.Add(000, "John Smith");
+            StudentList.Add(007, "James Bond");
 
-            _studentList.Add(brahm._number, brahm._name);
-            _studentList.Add(john._number, john._name);
-            _studentList.Add(david._number, david._name);
 
-        }*/
+        }
 
         private void addStudentIDAndNameButton_Click(object sender, EventArgs e)
         {
@@ -69,7 +65,7 @@ namespace BrahmLab2
                 {
                     int validStudentID;
                     Int32.TryParse(inputStudentIDTextBox.Text, out validStudentID);
-                    
+
                     StudentName = inputStudentNameTextBox.Text;
                     // Add student record 
                     StudentList.Add(validStudentID, StudentName);
@@ -87,9 +83,10 @@ namespace BrahmLab2
 
         }
 
+        // Delete a record using Student ID
         private void deleteRecordButton_Click(object sender, EventArgs e)
         {
-
+            // not yet implemented
         }
 
         private void deleteAllRecordsButton_Click(object sender, EventArgs e)
@@ -105,40 +102,61 @@ namespace BrahmLab2
             
         }
 
+        // Search for a record using Student ID
         private void searchWithStudentIDButton_Click(object sender, EventArgs e)
         {
-            string studentRecord;       // value connected to key
-            try
+            // Check if StudentId is filled
+            bool isStudentIDEmpty = string.IsNullOrWhiteSpace(inputStudentIDTextBox.Text);
+            if (!isStudentIDEmpty)
+            {
+                string studentRecord; // value connected to key
+                try
                 {
-                int.Parse(inputStudentIDTextBox.Text);
-            }
+                    int.Parse(inputStudentIDTextBox.Text);
+                }
                 catch (Exception)
-            {
-                MessageBox.Show("Please enter Student ID as a number");
-            }
-            StudentId = inputStudentIDTextBox.Text;
-            if (StudentList.TryGetValue(Convert.ToInt32(StudentId), out studentRecord))
-            {
-                MessageBox.Show(studentRecord);
+                {
+                    MessageBox.Show("Please enter Student ID as a number");
+                }
+
+                StudentId = inputStudentIDTextBox.Text;
+                if (StudentList.TryGetValue(Convert.ToInt32(StudentId), out studentRecord))
+                {
+                    MessageBox.Show(studentRecord);
+                }
+                else
+                {
+                    MessageBox.Show("Student record not found");
+                }
             }
             else
             {
-                MessageBox.Show("Student record not found");
+                MessageBox.Show("Please enter a Student ID");
             }
 
         }
 
+        // Clear the input fields
         private void clearDisplayScreenButton_Click(object sender, EventArgs e)
         {
             inputStudentIDTextBox.Clear();
             inputStudentNameTextBox.Clear();
         }
 
+        // Display all records
         private void displayAllButton_Click(object sender, EventArgs e)
         {
-
+            string allRecords = "";
+            int numOfRecord = 0;
+            foreach (KeyValuePair<int, string> record in StudentList)
+            {
+                numOfRecord++;
+                allRecords += $"{numOfRecord}: {record}\n";     // format string output of student list
+            }
+            MessageBox.Show(allRecords);
         }
 
+        // Close the Application
         private void quitButton_Click(object sender, EventArgs e)
         {
             // Confirm application exit
