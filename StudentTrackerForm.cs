@@ -43,7 +43,7 @@ namespace BrahmLab2
             set { _studentList = value; }
         }
 
-
+        // Sample list of students
         private void _sampleList()
         {
             StudentList.Add(300500046, "Brahm Ramkissoon");
@@ -86,8 +86,46 @@ namespace BrahmLab2
         // Delete a record using Student ID
         private void deleteRecordButton_Click(object sender, EventArgs e)
         {
-            // not yet implemented
+            // Check if StudentId is filled
+            bool isStudentIDEmpty = string.IsNullOrWhiteSpace(inputStudentIDTextBox.Text);
+            if (!isStudentIDEmpty)
+            {
+                string studentRecord; // value connected to key
+                try
+                {
+                    int.Parse(inputStudentIDTextBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter Student ID as a number");
+                }
+
+                StudentId = inputStudentIDTextBox.Text;
+                if (StudentList.ContainsKey(Convert.ToInt32(StudentId)))
+                {
+                    // Confirm removal of record
+
+                    DialogResult confirmRemove =
+                        MessageBox.Show($"Are you sure you want remove this record? \n ",
+                                        "Confirm Record Removal", MessageBoxButtons.YesNo);
+
+                    if (confirmRemove == DialogResult.Yes)
+                    {
+                        StudentList.Remove(Convert.ToInt32(StudentId));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Student record not found");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a Student ID");
+            }
+
         }
+    
 
         private void deleteAllRecordsButton_Click(object sender, EventArgs e)
         {
